@@ -1,5 +1,7 @@
 #!/usr/bin/false
 
+bash -c 'sleep 2400; killall ninja' &
+
 CHROMIUM_URL="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$VERSION.tar.xz"
 
 rm -Rf chromium-build
