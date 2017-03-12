@@ -40,9 +40,8 @@ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /tmp/
 export PATH="/tmp/depot_tools:$PATH"
 
 bash build/install-build-deps.sh --no-arm --no-nacl --no-prompt --no-syms
+gclient runhooks
 
-python2 build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
-python2 tools/gn/bootstrap/bootstrap.py
 mkdir -p out/Release
 
 echo 'import("//build/args/headless.gn")' > out/Release/args.gn
@@ -69,7 +68,7 @@ echo 'use_pulseaudio=false' >> out/Release/args.gn
 echo 'use_seccomp_bpf=false' >> out/Release/args.gn
 echo 'use_udev=false' >> out/Release/args.gn
 
-out/Release/gn gen out/Release --script-executable=/usr/bin/python2
+gn gen out/Release --script-executable=/usr/bin/python2
 ninja -C out/Release headless_shell
 
 popd # chromium
