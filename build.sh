@@ -55,6 +55,8 @@ echo 'fatal_linker_warnings=false' >> out/Release/args.gn
 echo 'treat_warnings_as_errors=false' >> out/Release/args.gn
 echo 'remove_webcore_debug_symbols=true' >> out/Release/args.gn
 
+echo 'enable_nacl=false' >> out/Release/args.gn
+
 echo 'use_cups=false' >> out/Release/args.gn
 echo 'use_dbus=false' >> out/Release/args.gn
 echo 'use_gconf=false' >> out/Release/args.gn
