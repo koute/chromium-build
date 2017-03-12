@@ -42,8 +42,6 @@ mkdir -p out/Release
 
 echo 'import("//build/args/headless.gn")' > out/Release/args.gn
 
-echo 'use_sysroot=false' >> out/Release/args.gn
-echo 'is_clang=false' >> out/Release/args.gn
 echo 'is_debug=false' >> out/Release/args.gn
 echo 'clang_use_chrome_plugins=false' >> out/Release/args.gn
 echo 'symbol_level=0' >> out/Release/args.gn
