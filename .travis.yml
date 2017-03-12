@@ -1,0 +1,25 @@
+language: cpp
+
+dist: trusty
+sudo: false
+
+os:
+  - linux
+
+addons:
+  apt:
+    packages:
+      - gcc-4.8-multilib
+      - g++-4.8-multilib
+      - libc6-dev-i386
+      - linux-libc-dev
+
+before_script:
+    - git clone https://github.com/koute/ci-helpers.git
+
+script: bash ./ci-helpers/ci.sh
+
+env:
+  matrix:
+    - ARCH='i686'
+    - ARCH='x86_64'
