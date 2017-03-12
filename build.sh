@@ -77,6 +77,8 @@ echo 'use_libpci=false' >> out/Release/args.gn
 echo 'use_pulseaudio=false' >> out/Release/args.gn
 echo 'use_udev=false' >> out/Release/args.gn
 
+echo 'cc_wrapper="ccache"' >> out/Release/args.gn
+
 out/Release/gn gen out/Release --script-executable=/usr/bin/python2
 ninja -C out/Release headless_shell
 
