@@ -13,6 +13,7 @@ addons:
       - g++-4.8-multilib
       - libc6-dev-i386
       - linux-libc-dev
+      - ninja-build
 
 before_script:
     - git clone https://github.com/koute/ci-helpers.git
