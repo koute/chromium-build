@@ -36,6 +36,11 @@ pushd chromium
 mkdir tmp
 export TMPDIR="`pwd`/tmp"
 
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /tmp/depot_tools
+export PATH="/tmp/depot_tools:$PATH"
+
+bash build/install-build-deps.sh --no-arm --no-nacl --no-prompt --no-syms
+
 python2 build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
 python2 tools/gn/bootstrap/bootstrap.py
 mkdir -p out/Release
