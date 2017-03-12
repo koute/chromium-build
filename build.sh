@@ -36,6 +36,7 @@ pushd chromium
 mkdir tmp
 export TMPDIR="`pwd`/tmp"
 
+python2 build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
 python2 tools/gn/bootstrap/bootstrap.py
 mkdir -p out/Release
 
