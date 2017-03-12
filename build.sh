@@ -79,6 +79,9 @@ echo 'use_udev=false' >> out/Release/args.gn
 
 echo 'cc_wrapper="ccache"' >> out/Release/args.gn
 
+sed -i 's/extra_cflags = ""/extra_cflags = "-Qunused-arguments"/' build/toolchain/gcc_toolchain.gni
+sed -i 's/extra_cxxflags = ""/extra_cxxflags = "-Qunused-arguments"/' build/toolchain/gcc_toolchain.gni
+
 out/Release/gn gen out/Release --script-executable=/usr/bin/python2
 ninja -C out/Release headless_shell
 
