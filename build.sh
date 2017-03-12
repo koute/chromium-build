@@ -1,7 +1,5 @@
 #!/usr/bin/false
 
-bash -c 'sleep 2400; killall ninja' &
-
 CHROMIUM_URL="https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$VERSION.tar.xz"
 
 rm -Rf chromium-build
@@ -85,7 +83,7 @@ sed -i 's/extra_cflags = ""/extra_cflags = " -Qunused-arguments "/' build/toolch
 sed -i 's/extra_cxxflags = ""/extra_cxxflags = " -Qunused-arguments "/' build/toolchain/gcc_toolchain.gni
 
 out/Release/gn gen out/Release --script-executable=/usr/bin/python2
-ninja -C out/Release headless_shell
+( PID=$BASHPID; (sleep 2200; kill $PID; sleep 10; killall cmake ninja gcc g++ || true) & exec ninja -C out/Release headless_shell )
 
 popd # chromium
 
