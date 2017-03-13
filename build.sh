@@ -79,8 +79,9 @@ echo 'use_udev=false' >> out/Release/args.gn
 
 echo 'cc_wrapper="ccache"' >> out/Release/args.gn
 
-sed -i 's/extra_cflags = ""/extra_cflags = " -Qunused-arguments "/' build/toolchain/gcc_toolchain.gni
-sed -i 's/extra_cxxflags = ""/extra_cxxflags = " -Qunused-arguments "/' build/toolchain/gcc_toolchain.gni
+FLAGS="-Qunused-arguments -Wno-tautological-compare -Wno-array-bounds -Wno-unused-value -Wno-parentheses-equality -Wno-null-conversion"
+sed -i 's/extra_cflags = ""/extra_cflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
+sed -i 's/extra_cxxflags = ""/extra_cxxflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
 
 out/Release/gn gen out/Release --script-executable=/usr/bin/python2
 ( PID=$BASHPID; (sleep 2200; kill $PID; sleep 10; killall cmake ninja gcc g++ || true) & exec ninja -C out/Release headless_shell )
