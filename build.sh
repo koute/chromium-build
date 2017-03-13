@@ -42,9 +42,15 @@ bash build/install-build-deps.sh --no-arm --no-nacl --no-prompt --no-syms
 
 python2 build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
 python2 tools/clang/scripts/update.py
-python2 tools/gn/bootstrap/bootstrap.py --gn-gen-args="fatal_linker_warnings=false treat_warnings_as_errors=false clang_use_chrome_plugins=false"
 
+mkdir -p $TRAVIS_BUILD_DIR/cache
 mkdir -p out/Release
+cp $TRAVIS_BUILD_DIR/cache/gn ./out/Release/ || true
+
+if [ ! -f out/Release/gn ]; then
+    python2 tools/gn/bootstrap/bootstrap.py --gn-gen-args="fatal_linker_warnings=false treat_warnings_as_errors=false clang_use_chrome_plugins=false"
+    cp out/Release/gn $TRAVIS_BUILD_DIR/cache/
+fi
 
 echo 'import("//build/args/headless.gn")' > out/Release/args.gn
 

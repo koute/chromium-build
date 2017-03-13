@@ -1,5 +1,11 @@
 language: cpp
-cache: ccache
+cache:
+  ccache: true
+  directories:
+    - cache
+
+before_cache:
+  - bash ./cache.sh
 
 dist: trusty
 sudo: required
