@@ -50,7 +50,8 @@ python2 tools/clang/scripts/update.py
 
 mkdir -p $TRAVIS_BUILD_DIR/cache
 mkdir -p out/Release
-cp $TRAVIS_BUILD_DIR/cache/gn ./out/Release/ || true
+cp $TRAVIS_BUILD_DIR/cache/* ./out/Release/ || true
+touch ./out/Release/* || true
 
 if [ ! -f out/Release/gn ]; then
     python2 tools/gn/bootstrap/bootstrap.py --gn-gen-args="fatal_linker_warnings=false treat_warnings_as_errors=false clang_use_chrome_plugins=false"
