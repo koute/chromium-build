@@ -40,7 +40,12 @@ export PATH="/tmp/depot_tools:$PATH"
 
 bash build/install-build-deps.sh --no-arm --no-nacl --no-prompt --no-syms
 
-python2 build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
+if [ $ARCH == 'i686' ]; then
+    python2 build/linux/sysroot_scripts/install-sysroot.py --arch=i386
+else
+    python2 build/linux/sysroot_scripts/install-sysroot.py --arch=amd64
+fi
+
 python2 tools/clang/scripts/update.py
 
 mkdir -p $TRAVIS_BUILD_DIR/cache
@@ -85,7 +90,13 @@ echo 'use_udev=false' >> out/Release/args.gn
 
 echo 'cc_wrapper="ccache"' >> out/Release/args.gn
 
+if [ $ARCH == 'i686' ]; then
+    echo 'target_cpu="x86"' >> out/Release/args.gn
+    echo 'target_arch=ia32' >> out/Release/args.gn
+fi
+
 FLAGS="-Qunused-arguments -Wno-tautological-compare -Wno-array-bounds -Wno-unused-value -Wno-parentheses-equality -Wno-null-conversion"
+FLAGS="$FLAGS $EXTRA_CFLAGS"
 sed -i 's/extra_cflags = ""/extra_cflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
 sed -i 's/extra_cxxflags = ""/extra_cxxflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
 
