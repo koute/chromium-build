@@ -84,7 +84,7 @@ sed -i 's/extra_cflags = ""/extra_cflags = " $FLAGS "/' build/toolchain/gcc_tool
 sed -i 's/extra_cxxflags = ""/extra_cxxflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
 
 out/Release/gn gen out/Release --script-executable=/usr/bin/python2
-( PID=$BASHPID; (sleep 2200; kill $PID; sleep 10; killall cmake ninja gcc g++ || true) & exec ninja -C out/Release headless_shell )
+ninja -C out/Release headless_shell
 
 popd # chromium
 
