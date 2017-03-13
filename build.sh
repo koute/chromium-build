@@ -97,8 +97,8 @@ fi
 
 FLAGS="-Qunused-arguments -Wno-tautological-compare -Wno-array-bounds -Wno-unused-value -Wno-parentheses-equality -Wno-null-conversion"
 FLAGS="$FLAGS $EXTRA_CFLAGS"
-sed -i 's/extra_cflags = ""/extra_cflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
-sed -i 's/extra_cxxflags = ""/extra_cxxflags = " $FLAGS "/' build/toolchain/gcc_toolchain.gni
+sed -i "s/extra_cflags = \"\"/extra_cflags = \" $FLAGS \"/" build/toolchain/gcc_toolchain.gni
+sed -i "s/extra_cxxflags = \"\"/extra_cxxflags = \" $FLAGS \"/" build/toolchain/gcc_toolchain.gni
 
 out/Release/gn gen out/Release --script-executable=/usr/bin/python2
 ninja -C out/Release headless_shell
